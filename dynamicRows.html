@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+<body>
+
+    <input type="number" id="createRowCountId" />
+    <button type="button" onclick="createRows($('#createRowCountId').val())">Oluştur</button>
+
+    <table id="testTable">
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script id="rowTemplate" type="text/template">
+        <tr>
+            <td>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </span>
+                    <input type="text" class="form-control" name="partName##ID" id="partName##ID">
+                </div>
+                <input type="button" value="Çıkar" class="btn btn-danger" onclick="removeRow($(this).closest('tr'))">
+            </td>
+        </tr>
+    </script>
+
+    <script>
+
+        function removeRow(row) {
+            row.fadeOut(1000, function () {
+                row.remove();
+            });
+        };
+
+        function createRows(count) {
+            //Temizlemek istersen diye
+            //$("#testTable tbody")[0].innerHTML = "";
+
+            for (var i = 0; i < count; i++) {
+                $("#testTable tbody")[0].innerHTML += $("#rowTemplate").html().replace(/##ID/g, i);
+            }
+        }
+    </script>
+</body>
+
+</html>
